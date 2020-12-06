@@ -1,56 +1,23 @@
-# version: "3.8"
-# services:
-#   api:
-#     container_name: django_api
-#     build:
-#       context: .
-#       dockerfile: Dockerfile
-#     command: python manage.py runserver 0.0.0.0:8000
-#     volumes: 
-#       - .:/app
-#     ports: 
-#       - 8000:8000
-#     depends_on: 
-#       - db
-  
-#   db:
-#     container_name: django_db
-#     image: mysql:8.0.22
-#     restart: always
-#     environment:
-#       MYSQL_DATABASE: django
-#       MYSQL_USER: root
-#       MYSQL_PASSWORD: root
-#       MYSQL_ROOT_PASSWORD: Mount@8848
-#     volumes: 
-#       - .dbdata:/var/lib/mysql
-
-
-version: '3'
-
+version: "3.8"
 services:
   db:
-    image: mysql
-    restart: always
-    command: --default-authentication-plugin=mysql_native_password --mysqlx=0
+    image: "postgres:11"
     environment:
-      - MYSQL_HOST=localhost
-      - MYSQL_PORT=3306  # cannot change this port to other number
-      - MYSQL_DATABASE=django_db # name you want for the database
-      - MYSQL_USER=root # change to whatever username you want
-      - MYSQL_PASSWORD=root #change to the password you want for user
-      - MYSQL_ROOT_PASSWORD=root #change to good root password
-    ports:
-      - "3306:3306"
+      - "POSTGRES_HOST_AUTH_METHOD=trust"
     volumes:
-      - "./db:/var/lib/mysql"
- 
+      - postgres_data:/var/lib/postgresql/data/
   web:
+    restart: always
     build: .
-    command: python manage.py runserver 0.0.0.0:8000
+    command: python /code/manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/code
     ports:
-      - "8000:8000"
+      - 8000:8000
+    env_file:
+      - ./.env
     depends_on:
       - db
+
+volumes:
+  postgres_data:
