@@ -1,10 +1,11 @@
 from django.contrib import admin
 from django.urls import path, include
-from .views import hello_daju
+from .views import users, register
 
 app_name = "accounts"
 
 urlpatterns = [
-   path("hello", hello_daju, name="hello_daju" )
+   path("users", users, name="hello_daju" ),
+   path("register", register, name="register")
    
 ]
