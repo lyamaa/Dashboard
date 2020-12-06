@@ -11,7 +11,8 @@ from .serializers import UserSerializer
 @api_view(['GET'])
 def users(request):
     user = User.objects.all()
-    return Response(user)
+    serializer = UserSerializer(user, many=True)
+    return Response(serializer.data)
 
 @api_view(['POST'])
 def register(request):
