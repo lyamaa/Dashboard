@@ -1,5 +1,6 @@
 from django.db.models import Q
-from rest_framework import exceptions
+from rest_framework import exceptions, viewsets
+from rest_framework import views
 from rest_framework.decorators import api_view
 from rest_framework.serializers import Serializer
 from rest_framework.views import APIView
@@ -83,3 +84,23 @@ class PermissionAPIView(APIView):
         serializer = PermissionSerializer(Permission.objects.all(), many=True)
 
         return Response({"data": serializer.data})
+
+
+class RoleViewSet(viewsets.ViewSet):
+    authentication_classes = [JWTauthentication]
+    permission_classes = [IsAuthenticated]
+
+    def list(self, request):
+        pass
+
+    def create(self, request):
+        pass
+
+    def retrieve(self, request, pk=None):
+        pass
+
+    def update(self, request, pk=None):
+        pass
+
+    def destroy(self, request, pk=None):
+        pass
