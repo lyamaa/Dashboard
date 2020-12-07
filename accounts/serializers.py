@@ -1,7 +1,7 @@
 from django.db.models import fields
-from rest_framework import serializers
+from rest_framework import permissions, serializers
 
-from .models import User, Permission
+from .models import User, Permission, Role
 
 
 class PermissionSerializer(serializers.ModelSerializer):
@@ -9,6 +9,11 @@ class PermissionSerializer(serializers.ModelSerializer):
         model = Permission
         fields = "__all__"
 
+class RoleSerializers(serializers.ModelSerializer):
+    permissions = PermissionSerializer(many=True)
+    class Meta:
+        model = Role
+        fields = '__all__'
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:

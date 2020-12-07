@@ -19,7 +19,7 @@ urlpatterns = [
     path("login", login, name="login"),
     path("user", AuthenticationUser.as_view()),
     path("logout", logout, name="logout"),
-    path("rples", RoleViewSet.as_view({"get": "list", "post": "create"})),
+    path("roles", RoleViewSet.as_view({"get": "list", "post": "create"})),
     path(
         "roles/<str:pk>",
         RoleViewSet.as_view({"get": "retrieve", "put": "update", "delete": "destroy"}),

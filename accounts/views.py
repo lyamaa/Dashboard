@@ -7,9 +7,9 @@ from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-from .models import User, Permission
+from .models import Role, User, Permission
 from .authentication import generate_access_token, JWTauthentication
-from .serializers import UserSerializer, PermissionSerializer
+from .serializers import UserSerializer, PermissionSerializer, RoleSerializers
 
 
 @api_view(["GET"])
@@ -34,12 +34,13 @@ def register(request):
 @api_view(["POST"])
 def login(request, *args, **kwargs):
     if request.user.is_authenticated:
-        return Response({"Message": "You are already logged in ..."}, status=400)
+        return Response({'Message': 'You are already logged in ...'}, status=400)
     username = request.data.get("username")
     password = request.data.get("password")
 
     user = (
-        User.objects.filter(Q(username__iexact=username) | Q(email__iexact=username))
+        User.objects.filter(Q(username__iexact=username)
+                            | Q(email__iexact=username))
         .distinct()
         .first()
     )
@@ -83,15 +84,20 @@ class PermissionAPIView(APIView):
     def get(self, request):
         serializer = PermissionSerializer(Permission.objects.all(), many=True)
 
-        return Response({"data": serializer.data})
+        return Response({
+            'data': serializer.data
+        })
 
-
+""" Viewsets for role """
 class RoleViewSet(viewsets.ViewSet):
     authentication_classes = [JWTauthentication]
     permission_classes = [IsAuthenticated]
 
     def list(self, request):
-        pass
+        serializer = RoleSerializers(Role.objects.all(), many=True)
+        return Response({
+            'data': serializer.data
+        })
 
     def create(self, request):
         pass
