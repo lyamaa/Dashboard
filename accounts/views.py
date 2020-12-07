@@ -88,10 +88,14 @@ class PermissionAPIView(APIView):
             'data': serializer.data
         })
 
+
 """ Viewsets for role """
+
+
 class RoleViewSet(viewsets.ViewSet):
     authentication_classes = [JWTauthentication]
     permission_classes = [IsAuthenticated]
+
 
     def list(self, request):
         serializer = RoleSerializers(Role.objects.all(), many=True)
@@ -107,12 +111,27 @@ class RoleViewSet(viewsets.ViewSet):
             'data': serializer.data
         }, status=status.HTTP_201_CREATED)
 
+    def retrieve(self, request, pk=None,):
+        role = Role.objects.get(id=pk)
+        serializer = RoleSerializers(role)
 
-    def retrieve(self, request, pk=None):
-        pass
+        return Response({
+            "data": serializer.data
+        })
 
     def update(self, request, pk=None):
-        pass
+        role = Role.objects.get(id=pk)
+        serializer = RoleSerializers(instance=role, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+
+        return Response({
+            'data': serializer.data
+        }, status=status.HTTP_202_ACCEPTED)
 
     def destroy(self, request, pk=None):
-        pass
+        role = Role.objects.get(id=pk)
+        role.delete()
+        return Response(
+            status=status.HTTP_204_NO_CONTENT
+        )
