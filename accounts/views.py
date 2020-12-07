@@ -1,11 +1,9 @@
-from django.shortcuts import render
 from django.db.models import Q
 from rest_framework import exceptions
 from rest_framework.decorators import api_view
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from rest_framework.serializers import Serializer
 
 from .models import User
 from .authentication import generate_access_token, JWTauthentication
@@ -67,7 +65,8 @@ class AuthenticationUser(APIView):
     authentication_classes = [JWTauthentication]
     permission_classes = [IsAuthenticated]
 
-    def get(self, request):
+    @staticmethod
+    def get(request):
         serializer = UserSerializer(request.user)
 
         return Response({"data": serializer.data})
