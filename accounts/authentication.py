@@ -1,4 +1,3 @@
-from logging import exception
 from django.contrib.auth import get_user_model
 import jwt
 import datetime
