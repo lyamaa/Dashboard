@@ -67,7 +67,8 @@ class AuthenticationUser(APIView):
     authentication_classes = [JWTauthentication]
     permission_classes = [IsAuthenticated]
 
-    def get(self, request):
+    @staticmethod
+    def get(request):
         serializer = UserSerializer(request.user)
         
         return Response({
