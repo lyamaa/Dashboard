@@ -7,7 +7,8 @@ from .models import User, Permission
 class PermissionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Permission
-        fields = '__all__'
+        fields = "__all__"
+
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
