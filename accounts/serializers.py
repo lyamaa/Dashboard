@@ -9,11 +9,14 @@ class PermissionSerializer(serializers.ModelSerializer):
         model = Permission
         fields = "__all__"
 
+
 class RoleSerializers(serializers.ModelSerializer):
     permissions = PermissionSerializer(many=True)
+
     class Meta:
         model = Role
-        fields = '__all__'
+        fields = "__all__"
+
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
