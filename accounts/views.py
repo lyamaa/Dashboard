@@ -1,5 +1,5 @@
 from django.db.models import Q
-from rest_framework import exceptions, viewsets
+from rest_framework import exceptions, viewsets, status
 from rest_framework import views
 from rest_framework.decorators import api_view
 from rest_framework.serializers import Serializer
@@ -100,7 +100,13 @@ class RoleViewSet(viewsets.ViewSet):
         })
 
     def create(self, request):
-        pass
+        serializer = RoleSerializers(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response({
+            'data': serializer.data
+        }, status=status.HTTP_201_CREATED)
+
 
     def retrieve(self, request, pk=None):
         pass
