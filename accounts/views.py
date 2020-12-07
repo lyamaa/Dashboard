@@ -53,6 +53,15 @@ def login(request, *args, **kwargs):
     }
     return response
 
+@api_view(['POST'])
+def logout(request):
+    response = Response()
+    response.delete_cookie(key='jwt')
+    response.data = {
+        'message': 'success'
+    }
+    return response
+
 
 class AuthenticationUser(APIView):
     authentication_classes = [JWTauthentication]
