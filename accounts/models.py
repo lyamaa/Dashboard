@@ -7,13 +7,13 @@ from django.contrib.auth.models import (
 
 from django.db import models
 
-USERNAME_REGEX = '^[a-zA-Z0-9.+-]*$'
+USERNAME_REGEX = "^[a-zA-Z0-9.+-]*$"
 
 
 class MyUserManager(BaseUserManager):
     def create_user(self, username, email, password=None):
         if not email:
-            raise ValueError('user must have an Email address')
+            raise ValueError("user must have an Email address")
         user = self.model(username=username, email=self.normalize_email(email))
         user.set_password(password)
         user.save(using=self._db)
@@ -30,10 +30,7 @@ class MyUserManager(BaseUserManager):
 class User(AbstractBaseUser, PermissionsMixin):
     # first_name = models.CharField(max_length=255)
     # last_name = models.CharField(max_length=255)
-    email = models.EmailField(
-        max_length=255,
-        unique=True,
-        verbose_name='email address')
+    email = models.EmailField(max_length=255, unique=True, verbose_name="email address")
 
     # password = models.CharField(max_length=255)
     username = models.CharField(
@@ -41,18 +38,19 @@ class User(AbstractBaseUser, PermissionsMixin):
         validators=[
             RegexValidator(
                 regex=USERNAME_REGEX,
-                message='Username must be alphanumeric or contains numbers',
-                code='Invalid Username'
-            )],
-        unique=True
+                message="Username must be alphanumeric or contains numbers",
+                code="Invalid Username",
+            )
+        ],
+        unique=True,
     )
     is_admin = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
 
     objects = MyUserManager()
 
-    USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = ['email']
+    USERNAME_FIELD = "username"
+    REQUIRED_FIELDS = ["email"]
 
     def has_perm(self, perm, obj=None):
         return True
