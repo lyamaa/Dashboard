@@ -1,11 +1,12 @@
 from django.shortcuts import render
+from django.db.models import Q
 from rest_framework import exceptions
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.serializers import Serializer
 
 from .models import User
-
+from .authentication import generate_access_token
 from .serializers import UserSerializer
 
 @api_view(['GET'])
@@ -24,3 +25,29 @@ def register(request):
     serializer.is_valid(raise_exception=True)
     serializer.save()
     return Response(serializer.data)
+
+@api_view(['POST'])
+def login(request, *args, **kwargs):
+    username = request.data.get('username')
+    password = request.data.get('password')
+
+    user = User.objects.filter(
+            Q(username__iexact=username) |
+            Q(email__iexact=username)
+        ).distinct().first()
+
+
+    if user is None:
+        raise exceptions.AuthenticationFailed("user not found")
+    
+    if not user.check_password(password):
+            raise exceptions.AuthenticationFailed("Incorrect password")
+    
+    response = Response()
+    token = generate_access_token(user)
+    response.set_cookie(key='jwt', value=token, httponly=True)
+    response.data = {
+        'jwt': token
+    }
+    return response
+
