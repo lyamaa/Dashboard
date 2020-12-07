@@ -40,11 +40,8 @@ def login(request, *args, **kwargs):
         .first()
     )
 
-    if user is None:
+    if user is None and not user.check_password(password):
         raise exceptions.AuthenticationFailed("user not found")
-
-    if not user.check_password(password):
-        raise exceptions.AuthenticationFailed("Incorrect password")
 
     response = Response()
     token = generate_access_token(user)
