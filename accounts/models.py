@@ -9,6 +9,7 @@ from django.db import models
 
 USERNAME_REGEX = "^[a-zA-Z0-9.+-]*$"
 
+
 class Permission(models.Model):
     name = models.CharField(max_length=255)
 
@@ -16,6 +17,7 @@ class Permission(models.Model):
 class Role(models.Model):
     name = models.CharField(max_length=255)
     permission = models.ManyToManyField(Permission)
+
 
 class MyUserManager(BaseUserManager):
     def create_user(self, username, email, password=None):
