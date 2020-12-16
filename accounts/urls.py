@@ -9,7 +9,7 @@ from .views import (
     AuthenticationUser,
     logout,
     RoleViewSet,
-    UserGenericApiView
+    UserGenericApiView,
 )
 
 app_name = "accounts"
@@ -19,8 +19,8 @@ urlpatterns = [
     path("register", register, name="register"),
     path("login", login, name="login"),
     path("user", AuthenticationUser.as_view()),
-    path('users', UserGenericApiView.as_view()),
-    path('user/<str:pk>', UserGenericApiView.as_view()),
+    path("users", UserGenericApiView.as_view()),
+    path("user/<str:pk>", UserGenericApiView.as_view()),
     path("logout", logout, name="logout"),
     path("roles", RoleViewSet.as_view({"get": "list", "post": "create"})),
     path(
