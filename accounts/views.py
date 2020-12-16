@@ -79,9 +79,9 @@ class AuthenticationUser(APIView):
 
     @staticmethod
     def get(request):
-        serializer = UserSerializer(request.user)
+        data = UserSerializer(request.user).data
 
-        return Response({"data": serializer.data})
+        return Response({"data": data})
 
 
 class PermissionAPIView(APIView):
