@@ -23,10 +23,10 @@ class RoleSerializers(serializers.ModelSerializer):
 
     class Meta:
         model = Role
-        fields = '__all__'
+        fields = "__all__"
 
     def create(self, validated_data):
-        permissions = validated_data.pop('permissions', None)
+        permissions = validated_data.pop("permissions", None)
         instance = self.Meta.model(**validated_data)
         instance.save()
         instance.permissions.add(*permissions)
