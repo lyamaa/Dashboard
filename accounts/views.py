@@ -7,7 +7,7 @@ from rest_framework import (
     mixins
     )
 from rest_framework import views
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.serializers import Serializer
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
@@ -164,13 +164,48 @@ class UserGenericApiView(
         
     
     def post(self, request):
+        request.data.update({
+            'password': 1234,
+            'role': request.data['role_id']
+        })
         return Response({
             'data': self.create(request).data
         })
     
     def put(self, request, pk=None):
+        if request.data['role_id']:
+            request.data.update({
+                'role': request.data['role_id']
+            })
         return Response({
-            'data': self.update(request, pk).data
+            'data': self.partial_update(request, pk).data
         })
     def delete(self, request, pk=None):
         return self.destroy(request, pk)
+
+
+class ProfileInfoAPIView(APIView):
+    authentication_classes = [JWTauthentication]
+    permission_classes = [IsAuthenticated]
+
+    def put(self, request, pk=None):
+        user = request.user
+        serializer = UserSerializer(user, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+    
+
+class ProfilePasswordApiView(APIView):
+    authentication_classes = [JWTauthentication]
+    permission_classes = [IsAuthenticated]
+
+    def put(self, request, pk=None):
+        user = request.user
+
+        if request.data['password'] != request.data['password_confirm']:
+            raise exceptions.ValidationError('Password Do not Match')
+        serializer = UserSerializer(user, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)

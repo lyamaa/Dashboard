@@ -13,7 +13,7 @@ class PermissionSerializer(serializers.ModelSerializer):
 class PermissionRelatedField(serializers.StringRelatedField):
     def to_representation(self, value):
         return PermissionSerializer(value).data
-    
+
     def to_internal_value(self, data):
         return data
 
@@ -24,7 +24,7 @@ class RoleSerializers(serializers.ModelSerializer):
     class Meta:
         model = Role
         fields = '__all__'
-    
+
     def create(self, validated_data):
         permissions = validated_data.pop('permissions', None)
         instance = self.Meta.model(**validated_data)
@@ -34,10 +34,20 @@ class RoleSerializers(serializers.ModelSerializer):
         return instance
 
 
+class RoleRelatedField(serializers.RelatedField):
+    def to_representation(self, instance):
+        return RoleSerializers(instance).data
+
+    def to_internal_value(self, data):
+        return self.queryset.get(pk=data)
+
+
 class UserSerializer(serializers.ModelSerializer):
+    role = RoleRelatedField(many=False, queryset=Role.objects.all())
+
     class Meta:
         model = User
-        fields = ["id", "username", "email", "password"]
+        fields = ["id", "username", "email", "password", "role"]
         extra_kwargs = {"password": {"write_only": True}}
 
     def create(self, validated_data):
