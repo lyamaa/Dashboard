@@ -16,6 +16,7 @@ from rest_framework.response import Response
 from .models import Role, User, Permission
 from .authentication import generate_access_token, JWTauthentication
 from .serializers import UserSerializer, PermissionSerializer, RoleSerializers
+from base.pagination import CustomPagination
 
 
 @api_view(["GET"])
@@ -152,24 +153,24 @@ class UserGenericApiView(
     permission_classes = [IsAuthenticated]
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    pagination_class = CustomPagination
 
     def get(self, request, pk=None):
         if pk:
             return Response({
-                'data': self.list(request).data
+                'data': self.retrieve(request, pk).data
             })
+        return self.list(request)
+        
+    
+    def post(self, request):
         return Response({
             'data': self.create(request).data
         })
     
-    def post(self, request, pk=None):
+    def put(self, request, pk=None):
         return Response({
-            'data': self.create(request, pk).data
-        })
-    
-    def put(self, request):
-        return Response({
-            'data': self.update(request).data
+            'data': self.update(request, pk).data
         })
     def delete(self, request, pk=None):
         return self.destroy(request, pk)
