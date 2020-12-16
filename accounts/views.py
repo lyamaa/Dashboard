@@ -1,5 +1,11 @@
 from django.db.models import Q
-from rest_framework import exceptions, viewsets, status
+from rest_framework import (
+    exceptions, 
+    viewsets, 
+    status, 
+    generics, 
+    mixins
+    )
 from rest_framework import views
 from rest_framework.decorators import api_view
 from rest_framework.serializers import Serializer
@@ -90,8 +96,6 @@ class PermissionAPIView(APIView):
 
 
 """ Viewsets for role """
-
-
 class RoleViewSet(viewsets.ViewSet):
     authentication_classes = [JWTauthentication]
     permission_classes = [IsAuthenticated]
@@ -135,3 +139,37 @@ class RoleViewSet(viewsets.ViewSet):
         return Response(
             status=status.HTTP_204_NO_CONTENT
         )
+
+class UserGenericApiView(
+    generics.GenericAPIView,
+    mixins.ListModelMixin,
+    mixins.RetrieveModelMixin,
+    mixins.CreateModelMixin,
+    mixins.UpdateModelMixin,
+    mixins.DestroyModelMixin
+    ):
+    authentication_classes = [JWTauthentication]
+    permission_classes = [IsAuthenticated]
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+    def get(self, request, pk=None):
+        if pk:
+            return Response({
+                'data': self.list(request).data
+            })
+        return Response({
+            'data': self.create(request).data
+        })
+    
+    def post(self, request, pk=None):
+        return Response({
+            'data': self.create(request, pk).data
+        })
+    
+    def put(self, request):
+        return Response({
+            'data': self.update(request).data
+        })
+    def delete(self, request, pk=None):
+        return self.destroy(request, pk)
