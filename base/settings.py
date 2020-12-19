@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "accounts",
-    "products"
+    "products",
+    'orders'
 ]
 
 MIDDLEWARE = [
@@ -128,4 +129,9 @@ USE_TZ = True
 STATIC_URL = "/static/"
 
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media_cdn'
+
 AUTH_USER_MODEL = "accounts.User"
+
+BASE_URL = "http://127.0.0.1:8000"
