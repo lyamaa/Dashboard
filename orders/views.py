@@ -9,10 +9,8 @@ from base.pagination import CustomPagination
 
 
 class OrderGenericAPIView(
-    generics.GenericAPIView, 
-    mixins.ListModelMixin, 
-    mixins.RetrieveModelMixin
-    ):
+    generics.GenericAPIView, mixins.ListModelMixin, mixins.RetrieveModelMixin
+):
     authentication_classes = [JWTauthentication]
     permission_classes = [IsAuthenticated]
     queryset = Order.objects.all()
@@ -21,7 +19,5 @@ class OrderGenericAPIView(
 
     def get(self, request, pk=None):
         if pk:
-            return Response({
-                'data': self.retrieve(request, pk).data
-            })
+            return Response({"data": self.retrieve(request, pk).data})
         return self.list(request)
