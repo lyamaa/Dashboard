@@ -7,6 +7,7 @@ from rest_framework import (
     mixins
     )
 from rest_framework import views
+from .permissions import PermissionsView
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.serializers import Serializer
 from rest_framework.views import APIView
@@ -99,7 +100,8 @@ class PermissionAPIView(APIView):
 """ Viewsets for role """
 class RoleViewSet(viewsets.ViewSet):
     authentication_classes = [JWTauthentication]
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated & PermissionsView]
+    permission_object = 'roles'
 
 
     def list(self, request):
@@ -150,7 +152,8 @@ class UserGenericApiView(
     mixins.DestroyModelMixin
     ):
     authentication_classes = [JWTauthentication]
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated & PermissionsView]
+    permission_object = 'users'
     queryset = User.objects.all()
     serializer_class = UserSerializer
     pagination_class = CustomPagination
