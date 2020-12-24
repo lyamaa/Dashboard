@@ -25,7 +25,6 @@ class Role(models.Model):
         return self.name
 
 
-
 class MyUserManager(BaseUserManager):
     def create_user(self, username, email, password=None):
         if not email:

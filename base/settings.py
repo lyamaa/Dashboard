@@ -38,16 +38,13 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-
-
     # 3rd party app
     "rest_framework",
-    'corsheaders',
-
+    "corsheaders",
     # MY APP
     "accounts",
     "products",
-    'orders'
+    "orders",
 ]
 
 MIDDLEWARE = [
@@ -136,8 +133,8 @@ USE_TZ = True
 STATIC_URL = "/static/"
 
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media_cdn'
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media_cdn"
 
 AUTH_USER_MODEL = "accounts.User"
 
