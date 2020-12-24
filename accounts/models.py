@@ -60,7 +60,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         ],
         unique=True,
     )
-    role = models.ForeignKey(Role, on_delete=models.SET_NULL, null=True)
+    role = models.ForeignKey(Role, on_delete=models.SET_NULL, null=True, default="3")
     is_admin = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
 

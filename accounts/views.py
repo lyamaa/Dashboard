@@ -176,13 +176,16 @@ class UserGenericApiView(
         })
     
     def put(self, request, pk=None):
+
         if request.data['role_id']:
             request.data.update({
                 'role': request.data['role_id']
             })
+
         return Response({
             'data': self.partial_update(request, pk).data
         })
+
     def delete(self, request, pk=None):
         return self.destroy(request, pk)
 
