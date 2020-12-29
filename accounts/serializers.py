@@ -60,8 +60,26 @@ class UserSerializer(serializers.ModelSerializer):
         return instance
     
     def perform_update(self, instance, validated_data):
+        user = self.context['request'].user
+        if user.pk != instance.pk:
+            raise serializers.ValidationError({"authorize": "You dont have permission for this user."})
+        instance.set_password(validated_data['password'])
+        instance.save()
+        return instance
+
+class ChangePassword(serializers.ModelSerializer):
+   
+    class Meta:
+        model = User
+        fields = ["id","password"]
+        
+        extra_kwargs = {"password": {"write_only": True}}
+
+    def update(self, instance, validated_data):
         password = validated_data.pop('password', None)
         if password is not None:
             instance.set_password(password)
         instance.save()
         return instance
+
+

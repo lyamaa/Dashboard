@@ -16,7 +16,12 @@ from rest_framework.response import Response
 
 from .models import Role, User, Permission
 from .authentication import generate_access_token, JWTauthentication
-from .serializers import UserSerializer, PermissionSerializer, RoleSerializers
+from .serializers import (
+    UserSerializer, 
+    PermissionSerializer, 
+    RoleSerializers,
+    ChangePassword
+    )
 from base.pagination import CustomPagination
 
 
@@ -211,7 +216,7 @@ class ProfilePasswordApiView(APIView):
 
         if request.data['password'] != request.data['password_confirm']:
             raise exceptions.ValidationError('Password Do not Match')
-        serializer = UserSerializer(user, data=request.data, partial=True)
+        serializer = ChangePassword(user, data=request.data, partial=True)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data)
