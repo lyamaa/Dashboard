@@ -7,3 +7,5 @@ migrations
 .vscode/
 root.session.sql
 db.sqlite3
+
+media_cdn
