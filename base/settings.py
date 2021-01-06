@@ -26,17 +26,14 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-
-
     # 3rd party app
     "rest_framework",
-    'corsheaders',
-    'django_rest_passwordreset',
-
+    "corsheaders",
+    "django_rest_passwordreset",
     # MY APP
     "accounts",
     "products",
-    'orders'
+    "orders",
 ]
 
 MIDDLEWARE = [
@@ -55,7 +52,7 @@ ROOT_URLCONF = "base.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / 'build'],
+        "DIRS": [BASE_DIR / "build"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -125,12 +122,12 @@ USE_TZ = True
 STATIC_URL = "/static/"
 
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media_cdn'
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media_cdn"
 
 AUTH_USER_MODEL = "accounts.User"
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 BASE_URL = "http://127.0.0.1:8000"
 
