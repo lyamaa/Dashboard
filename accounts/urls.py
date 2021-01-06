@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path, include
-from django.urls import path
+
 
 from .views import (
     PermissionAPIView,
@@ -32,4 +32,5 @@ urlpatterns = [
     path('user/password', ProfilePasswordApiView.as_view()),
     path('users', UserGenericApiView.as_view()),
     path('user/<str:pk>', UserGenericApiView.as_view()),
+    
 ]
