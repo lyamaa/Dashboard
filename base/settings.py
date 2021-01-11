@@ -1,6 +1,6 @@
 from pathlib import Path
 import os
-
+import cloudinary
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -15,6 +15,8 @@ SECRET_KEY = "!0ftqk#mb0b(e&c4r9=dwh9p2e0rez+fcjrynw*yzsb-)ez^6o"
 DEBUG = True
 
 ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
+
+
 
 
 # Application definition
@@ -32,6 +34,9 @@ INSTALLED_APPS = [
     "rest_framework",
     'corsheaders',
     'django_rest_passwordreset',
+    'cloudinary',
+    
+
 
     # MY APP
     "accounts",
@@ -104,6 +109,13 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+cloudinary.config(
+                cloud_name=os.environ.get('CLOUD_NAME'),
+                api_key=os.environ.get('API_KEY'),
+                api_secret=os.environ.get('API_SECRET'),
+                secure=True
+                )
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
@@ -123,7 +135,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = "/static/"
-
+# STATICFILES_DIRS = [
+#     BASE_DIR / 'static'
+# ]
+STATIC_ROOT = (BASE_DIR / 'static')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media_cdn'

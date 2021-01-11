@@ -1,8 +1,8 @@
 from django.core.files.storage import default_storage
 from django.conf import settings
-from rest_framework import generics, mixins
+from rest_framework import generics, mixins, status
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.parsers import MultiPartParser
+from rest_framework.parsers import MultiPartParser, JSONParser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from accounts.authentication import JWTauthentication
@@ -10,6 +10,11 @@ from accounts.authentication import JWTauthentication
 from products.models import Product
 from products.serializers import ProductSerializer
 from base.pagination import CustomPagination
+
+from PIL import Image
+import cloudinary
+import cloudinary.uploader
+import json
 
 
 class ProductGenericAPIView(
@@ -50,13 +55,18 @@ class ProductGenericAPIView(
 class FileUploadView(APIView):
     authentication_classes = [JWTauthentication]
     permission_classes = [IsAuthenticated]
-    parser_classes = (MultiPartParser, )
+    parser_classes = (MultiPartParser, JSONParser, )
 
     def post(self, request):
-        file = request.FILES['image']
-        file_name = default_storage.save(file.name, file)
-        url = default_storage.url(file_name)
+       
+        file = request.data.get('image')
+        
+        upload_data = cloudinary.uploader.upload(file)
+        url = upload_data.get('secure_url')
+
+        # url = default_storage.url(file_name)
 
         return Response({
-            'url': settings.BASE_URL + url
+            'status': 'success',
+            'url': url,
         })

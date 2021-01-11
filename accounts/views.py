@@ -86,6 +86,7 @@ class AuthenticationUser(APIView):
     @staticmethod
     def get(request):
         data = UserSerializer(request.user).data
+        data['permissions'] = [p['name'] for p in data['role']['permissions']]
 
         return Response({"data": data})
 

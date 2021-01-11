@@ -46,11 +46,11 @@ class ExportApiView(APIView):
         for order in orders:
             writer.writerow([order.id, order.name, order.email, '', '', ])
 
-        orderItems = OrderItem.objects.all().filter(order_id=order.id)
+            orderItems = OrderItem.objects.all().filter(order_id=order.id)
 
-        for item in orderItems:
-            writer.writerow(["", "", "", item.product_title,
-                             item.price, item.quantity])
+            for item in orderItems:
+                writer.writerow(["", "", "", item.product_title,
+                                item.price, item.quantity])
 
         return response
 
