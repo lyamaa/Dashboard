@@ -2,7 +2,7 @@ env/
 __pycache__/
 .dbdata/
 db/
-.env
+
 migrations
 .vscode/
 root.session.sql
