@@ -1,6 +1,7 @@
 from pathlib import Path
 import os
 import cloudinary
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -17,8 +18,6 @@ DEBUG = True
 ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
 
 
-
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -28,20 +27,15 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-
-
     # 3rd party app
     "rest_framework",
-    'corsheaders',
-    'django_rest_passwordreset',
-    'cloudinary',
-    
-
-
+    "corsheaders",
+    "django_rest_passwordreset",
+    "cloudinary",
     # MY APP
     "accounts",
     "products",
-    'orders'
+    "orders",
 ]
 
 MIDDLEWARE = [
@@ -60,7 +54,7 @@ ROOT_URLCONF = "base.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / 'build'],
+        "DIRS": [BASE_DIR / "build"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -110,11 +104,11 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 cloudinary.config(
-                cloud_name=os.environ.get('CLOUD_NAME'),
-                api_key=os.environ.get('API_KEY'),
-                api_secret=os.environ.get('API_SECRET'),
-                secure=True
-                )
+    cloud_name=os.environ.get("CLOUD_NAME"),
+    api_key=os.environ.get("API_KEY"),
+    api_secret=os.environ.get("API_SECRET"),
+    secure=True,
+)
 
 
 # Internationalization
@@ -138,14 +132,14 @@ STATIC_URL = "/static/"
 # STATICFILES_DIRS = [
 #     BASE_DIR / 'static'
 # ]
-STATIC_ROOT = (BASE_DIR / 'static')
+STATIC_ROOT = BASE_DIR / "static"
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media_cdn'
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media_cdn"
 
 AUTH_USER_MODEL = "accounts.User"
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 BASE_URL = "http://127.0.0.1:8000"
 
