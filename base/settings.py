@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'django_rest_passwordreset',
     'cloudinary',
-    # 'webpack_loader',
+    'webpack_loader',
     
 
 
@@ -63,7 +63,7 @@ ROOT_URLCONF = "base.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / 'dist'],
+        "DIRS": [BASE_DIR / 'templates'],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -138,16 +138,20 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = "/static/"
-STATIC_ROOT = os.path.join(BASE_DIR, 'dist', 'static')
-STATICFILES_DIRS = []
+# STATIC_ROOT = os.path.join(BASE_DIR, 'dist', 'static')
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "assets"),
+    os.path.join(BASE_DIR, "frontend/dist"),
+]
 
 
-# WEBPACK_LOADER = {
-#     'DEFAULT': {
-#         'BUNDLE_DIR_NAME': 'dist/',
-#         'STATS_FILE': os.path.join(BASE_DIR, 'frontend', 'webpack-stats.json')
-#     }
-# }
+
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'BUNDLE_DIR_NAME': 'dist/',
+        'STATS_FILE': os.path.join(BASE_DIR, 'dashboard_vue', 'webpack-stats.json')
+    }
+}
 # STATIC_ROOT = (BASE_DIR / 'static')
 
 # MEDIA_URL = '/media/'

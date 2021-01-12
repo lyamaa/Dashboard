@@ -18,6 +18,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include, re_path
 from django.views.generic import TemplateView
+from .views import IndexTemplateView
 
 
 urlpatterns = [
@@ -26,7 +27,8 @@ urlpatterns = [
     path("api/", include('products.urls', namespace='products')),
     path("api/", include('orders.urls', namespace='orders')),
     path('api/password_reset/', include('django_rest_passwordreset.urls', namespace='password_reset')),
-    re_path(r"^.*$", TemplateView.as_view(template_name="index.html")),
+    # re_path(r"^.*$", TemplateView.as_view(template_name="index.html")),
+    re_path(r"^.*$", IndexTemplateView.as_view(), name="entry-point"),
 ]  
 
 # if settings.DEBUG:
