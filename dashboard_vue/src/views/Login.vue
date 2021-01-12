@@ -38,7 +38,7 @@
               </div>
               
               <button type="submit" class="button is-block is-info is-large is-fullwidth">
-                Login <i class="fas fa-sign-in" aria-hidden="true"></i>
+                Login <i class="fas fa-sign-in-alt" aria-hidden="true"></i>
               </button>
             </form>
           </div>
