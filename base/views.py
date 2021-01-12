@@ -1,8 +1,4 @@
-from django.conf import settings
-from django.views.generic.base import TemplateView
+from django.shortcuts import render
 
-
-class IndexTemplateView(TemplateView):
-    def get_template_names(self):
-        template_name = "index.html"
-        return template_name
+def index(request):
+    return render(request, template_name='index.html')
