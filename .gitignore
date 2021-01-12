@@ -3,7 +3,7 @@ __pycache__/
 .dbdata/
 db/
 
-migrations
+
 .vscode/
 root.session.sql
 db.sqlite3
