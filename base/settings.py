@@ -15,8 +15,8 @@ SECRET_KEY = "!0ftqk#mb0b(e&c4r9=dwh9p2e0rez+fcjrynw*yzsb-)ez^6o"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
+# ALLOWED_HOSTS = []
 
 
 
@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'django_rest_passwordreset',
     'cloudinary',
+    # 'webpack_loader',
     
 
 
@@ -137,10 +138,17 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = "/static/"
-STATICFILES_DIRS = [
-    BASE_DIR / 'dist/static'
-]
-STATIC_ROOT = (BASE_DIR / 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'dist', 'static')
+STATICFILES_DIRS = []
+
+
+# WEBPACK_LOADER = {
+#     'DEFAULT': {
+#         'BUNDLE_DIR_NAME': 'dist/',
+#         'STATS_FILE': os.path.join(BASE_DIR, 'frontend', 'webpack-stats.json')
+#     }
+# }
+# STATIC_ROOT = (BASE_DIR / 'static')
 
 # MEDIA_URL = '/media/'
 # MEDIA_ROOT = BASE_DIR / 'media_cdn'
