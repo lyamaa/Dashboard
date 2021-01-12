@@ -2,6 +2,7 @@ from pathlib import Path
 import os
 import cloudinary
 import django_heroku
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -16,9 +17,7 @@ SECRET_KEY = "!0ftqk#mb0b(e&c4r9=dwh9p2e0rez+fcjrynw*yzsb-)ez^6o"
 DEBUG = True
 
 # ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
-ALLOWED_HOSTS = ['*']
-
-
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -30,18 +29,16 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-
     # 3rd party app
     "rest_framework",
-    'corsheaders',
-    'django_rest_passwordreset',
-    'cloudinary',
-    'webpack_loader',
-
+    "corsheaders",
+    "django_rest_passwordreset",
+    "cloudinary",
+    "webpack_loader",
     # MY APP
     "accounts",
     "products",
-    'orders'
+    "orders",
 ]
 
 MIDDLEWARE = [
@@ -56,19 +53,19 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "base.urls"
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-STATIC_URL = '/static/'
-FRONTEND_DIR = os.path.join(BASE_DIR, 'dashboard_vue')
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
+STATIC_URL = "/static/"
+FRONTEND_DIR = os.path.join(BASE_DIR, "dashboard_vue")
 
 STATICFILES_DIRS = [
-    os.path.join(FRONTEND_DIR, 'dist/static'),
+    os.path.join(FRONTEND_DIR, "dist/static"),
 ]
 
 
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [os.path.join(FRONTEND_DIR, 'dist')],
+        "DIRS": [os.path.join(FRONTEND_DIR, "dist")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -99,9 +96,9 @@ WSGI_APPLICATION = "base.wsgi.application"
 # }
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
     }
 }
 
@@ -125,11 +122,11 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 cloudinary.config(
-                cloud_name=os.environ.get('CLOUD_NAME'),
-                api_key=os.environ.get('API_KEY'),
-                api_secret=os.environ.get('API_SECRET'),
-                secure=True
-                )
+    cloud_name=os.environ.get("CLOUD_NAME"),
+    api_key=os.environ.get("API_KEY"),
+    api_secret=os.environ.get("API_SECRET"),
+    secure=True,
+)
 
 
 # Internationalization
@@ -150,12 +147,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 
-
-
 WEBPACK_LOADER = {
-    'DEFAULT': {
-        'BUNDLE_DIR_NAME': 'dist/',
-        'STATS_FILE': os.path.join(BASE_DIR, 'dashboard_vue', 'webpack-stats.json')
+    "DEFAULT": {
+        "BUNDLE_DIR_NAME": "dist/",
+        "STATS_FILE": os.path.join(BASE_DIR, "dashboard_vue", "webpack-stats.json"),
     }
 }
 # STATIC_ROOT = (BASE_DIR / 'static')
@@ -165,7 +160,7 @@ WEBPACK_LOADER = {
 
 AUTH_USER_MODEL = "accounts.User"
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 BASE_URL = "http://127.0.0.1:8000"
 
@@ -173,4 +168,4 @@ CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
 
 django_heroku.settings(locals())
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
