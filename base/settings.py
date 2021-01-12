@@ -126,9 +126,9 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 cloudinary.config(
-                cloud_name=os.environ.get('dazyxzm1e'),
-                api_key=os.environ.get('456582439825493'),
-                api_secret=os.environ.get('jeWgOiCxVL8Kmbu0pAyTM4YpcLE'),
+                cloud_name='dazyxzm1e',
+                api_key='456582439825493',
+                api_secret='jeWgOiCxVL8Kmbu0pAyTM4YpcLE',
                 secure=True
                 )
 
