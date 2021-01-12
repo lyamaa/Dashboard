@@ -1,5 +1,5 @@
 <template>
-  <section class="hero is-success is-fullheight">
+  <section class="hero  is-fullheight">
     <div class="hero-body">
       <div class="container has-text-centered">
         <div class="column is-4 is-offset-4">
@@ -7,9 +7,9 @@
           <hr class="login-hr" />
           <p class="subtitle ">Please login to proceed.</p>
           <div class="box">
-            <figure class="image is-3by1">
+            <!-- <figure class="image is-3by1">
               <img :src="mySvg" />
-            </figure>
+            </figure> -->
              <p v-if="error" class="help is-danger box">{{error}}</p>
             <form @submit.prevent="submit">
               <div class="field">
@@ -83,7 +83,7 @@ export default defineComponent({
     return {
       username,
       password,
-      mySvg: require('../assets/img/profile.svg'),
+      // mySvg: require('../assets/img/profile.svg'),
       submit,
       error,
       
@@ -92,5 +92,4 @@ export default defineComponent({
 });
 </script>
 
-<style src="../assets/scss/login.scss" lang="scss">
-</style>
+ 

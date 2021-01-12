@@ -5,11 +5,9 @@
         <div class="columns">
           <div class="column left">
             <h1 class="title is-1">DJ DASH</h1>
-            <h2 class="subtitle colored is-2">नम्स्ते दाजु</h2>
+           
             
-             <figure class="image is-128X128 mt-5">
-              <img :src="mySvg" />
-            </figure>
+             
             
           </div>
           <div class="column right has-text-centered">
@@ -156,7 +154,7 @@ export default defineComponent({
       password_confirm,
       submit,
       error,
-      mySvg: require('../assets/img/profile.svg'),
+     
     };
   },
 });
