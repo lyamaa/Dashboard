@@ -56,7 +56,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "base.urls"
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 FRONTEND_DIR = os.path.join(BASE_DIR, 'dashboard_vue')
 
@@ -149,15 +149,6 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
-
-
-STATIC_URL = '/static/'
-FRONTEND_DIR = os.path.join(BASE_DIR, 'dashboard_vue')
-
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "assets"),
-    os.path.join(FRONTEND_DIR, 'dist'),
-]
 
 
 WEBPACK_LOADER = {
