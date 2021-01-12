@@ -31,15 +31,12 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 
-
     # 3rd party app
     "rest_framework",
     'corsheaders',
     'django_rest_passwordreset',
     'cloudinary',
     'webpack_loader',
-    
-
 
     # MY APP
     "accounts",
