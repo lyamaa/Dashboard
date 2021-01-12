@@ -62,7 +62,7 @@ FRONTEND_DIR = os.path.join(BASE_DIR, 'dashboard_vue')
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [FRONTEND_DIR / 'dist'],
+        "DIRS": [os.path.join(FRONTEND_DIR, 'dist')],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
