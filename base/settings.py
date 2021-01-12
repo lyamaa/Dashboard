@@ -15,8 +15,8 @@ SECRET_KEY = "!0ftqk#mb0b(e&c4r9=dwh9p2e0rez+fcjrynw*yzsb-)ez^6o"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
-# ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
+ALLOWED_HOSTS = []
 
 
 
