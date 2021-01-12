@@ -57,10 +57,12 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "base.urls"
 
+FRONTEND_DIR = os.path.join(BASE_DIR, 'dashboard_vue')
+
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / 'templates'],
+        "DIRS": [FRONTEND_DIR / 'dist'],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [

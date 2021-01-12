@@ -27,8 +27,8 @@ urlpatterns = [
     path("api/", include('products.urls', namespace='products')),
     path("api/", include('orders.urls', namespace='orders')),
     path('api/password_reset/', include('django_rest_passwordreset.urls', namespace='password_reset')),
-    # re_path(r"^.*$", TemplateView.as_view(template_name="index.html")),
-    re_path(r"^.*$", IndexTemplateView.as_view(), name="entry-point"),
+    re_path(r"^.*$", TemplateView.as_view(template_name="index.html")),
+    # re_path(r"^.*$", IndexTemplateView.as_view(), name="entry-point"),
 ]  
 
 # if settings.DEBUG:
