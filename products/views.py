@@ -18,12 +18,13 @@ import json
 
 
 class ProductGenericAPIView(
-        generics.GenericAPIView,
-        mixins.ListModelMixin,
-        mixins.RetrieveModelMixin,
-        mixins.CreateModelMixin,
-        mixins.UpdateModelMixin,
-        mixins.DestroyModelMixin):
+    generics.GenericAPIView,
+    mixins.ListModelMixin,
+    mixins.RetrieveModelMixin,
+    mixins.CreateModelMixin,
+    mixins.UpdateModelMixin,
+    mixins.DestroyModelMixin,
+):
 
     authentication_classes = [JWTauthentication]
     permission_classes = [IsAuthenticated]
@@ -33,40 +34,40 @@ class ProductGenericAPIView(
 
     def get(self, request, pk=None):
         if pk:
-            return Response({
-                'data': self.retrieve(request, pk).data
-            })
+            return Response({"data": self.retrieve(request, pk).data})
         return self.list(request)
 
     def post(self, request):
 
-        return Response({
-            'data': self.create(request).data
-        })
+        return Response({"data": self.create(request).data})
 
     def put(self, request, pk=None):
-        return Response({
-            'data': self.partial_update(request, pk).data
-        })
+        return Response({"data": self.partial_update(request, pk).data})
 
     def delete(self, request, pk=None):
         return self.destroy(request, pk)
 
+
 class FileUploadView(APIView):
     authentication_classes = [JWTauthentication]
     permission_classes = [IsAuthenticated]
-    parser_classes = (MultiPartParser, JSONParser, )
+    parser_classes = (
+        MultiPartParser,
+        JSONParser,
+    )
 
     def post(self, request):
-       
-        file = request.data.get('image')
-        
+
+        file = request.data.get("image")
+
         upload_data = cloudinary.uploader.upload(file)
-        url = upload_data.get('secure_url')
+        url = upload_data.get("secure_url")
 
         # url = default_storage.url(file_name)
 
-        return Response({
-            'status': 'success',
-            'url': url,
-        })
+        return Response(
+            {
+                "status": "success",
+                "url": url,
+            }
+        )
