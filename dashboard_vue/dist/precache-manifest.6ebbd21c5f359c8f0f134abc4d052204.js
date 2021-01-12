@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "bef0f5e0caccd0667ef2",
+    "revision": "cd72d1d3771048d46013",
     "url": "https://superdash8848.herokuapp.com/bundle.css"
   },
   {
-    "revision": "bef0f5e0caccd0667ef2",
+    "revision": "cd72d1d3771048d46013",
     "url": "https://superdash8848.herokuapp.com/bundle.js"
   },
   {

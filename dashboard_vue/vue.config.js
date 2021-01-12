@@ -22,7 +22,7 @@ module.exports = {
 
         config.devServer
             // the first 3 lines of the following code have been added to the configuration
-            .public('https://superdash8848.herokuapp.com/')    
+            .public('https://superdash8848.herokuapp.com')    
             .host('127.0.0.1')    
             .port(8080)
             .hotOnly(true)

@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "https://superdash8848.herokuapp.com/precache-manifest.eee10582b4c2d3b420da686453ca5789.js"
+  "https://superdash8848.herokuapp.com/precache-manifest.6ebbd21c5f359c8f0f134abc4d052204.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "dashboard_front"});
