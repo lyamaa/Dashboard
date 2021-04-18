@@ -5,7 +5,7 @@ cloudinary==1.24.0
 dj-database-url==0.5.0
 Django==3.1.6
 django-cors-headers==3.6.0
-django-debug-toolbar==3.2
+django-debug-toolbar==3.2.1
 django-heroku==0.3.1
 django-rest-passwordreset==1.1.0
 django-webpack-loader==0.7.0
