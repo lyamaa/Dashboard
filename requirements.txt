@@ -22,7 +22,7 @@ python-decouple==3.4
 python-dotenv==0.15.0
 pytz==2020.5
 six==1.15.0
-sqlparse==0.4.1
+sqlparse==0.4.2
 toml==0.10.2
 urllib3==1.26.5
 whitenoise==5.2.0
