@@ -1,7 +1,7 @@
 from django.dispatch import receiver
 from django.urls import reverse
 from django_rest_passwordreset.signals import reset_password_token_created
-from django.core.mail import send_mail  
+from django.core.mail import send_mail
 from django.core.validators import RegexValidator
 from django.contrib.auth.models import (
     AbstractBaseUser,
@@ -27,7 +27,6 @@ class Role(models.Model):
 
     def __str__(self):
         return self.name
-
 
 
 class MyUserManager(BaseUserManager):
@@ -84,9 +83,11 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 
 @receiver(reset_password_token_created)
-def password_reset_token_created(sender, instance, reset_password_token, *args, **kwargs):
-    
-    email_plaintext_message = "{}?token={}".format(reverse('password_reset:reset-password-request'), reset_password_token.key)
+def password_reset_token_created(
+    sender, instance, reset_password_token, *args, **kwargs
+):
+
+    email_plaintext_message = f"{reverse('password_reset:reset-password-request')}?token={reset_password_token.key}"
 
     send_mail(
         # title:
@@ -96,5 +97,5 @@ def password_reset_token_created(sender, instance, reset_password_token, *args, 
         # from:
         "noreply@somehost.local",
         # to:
-        [reset_password_token.user.email]
+        [reset_password_token.user.email],
     )
